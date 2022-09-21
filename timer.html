@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width">
+  <title>Study Timer</title>
+  <link href="style.css" rel="stylesheet" type="text/css" />
+  <link href="timer.css" rel="stylesheet" type="text/css">
+  <script src="script.js" defer></script>
+</head>
+
+<body>
+
+  <header>
+    <div id="title">
+      <div class="burger">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+      <h1>Stress and How to Deal With It</h1>
+    </div>
+
+    <nav class="menubar">
+      <a href="index.html" class="menulink">Home</a>
+      <a href="stress.html" class="menulink">What's Stress?</a>
+      <a href="symptoms.html" class="menulink">Symptoms of Stress</a>
+      <a href="methods.html" class="menulink">Methods to Cope with Stress</a>
+      <a href="helplines.html" class="menulink">Helplines</a>
+      <a href="game.html" class="menulink">Quiz</a>
+      <a href="timer.html" class="menulink" id="current-page">Timer</a>
+    </nav>
+  </header>
+
+  <h1 class="headline">Study Timer</h1>
+  <div class="mainContent" style="text-align: center;">
+    <p>
+      This page includes a study timer to help increase your productivity while giving sufficient breaks to prevent
+      feeling overstressed.<br>
+      Enter the duration you want to study for in the study duration section, and how long you want the break to be after the study time has elapsed.
+    </p>
+  </div>
+
+  <br><br>
+
+  <div class="timer-input"">
+    <h3 class=" subhead" id="mainhead">Study Duration:</h3>
+    <input class="timer" id="hoursStudy" type="number" min="0" max="23" placeholder="hrs">
+    <input class="timer" id="minutesStudy" type="number" min="0" max="59" placeholder="mins">
+  </div>
+
+  <div class="timer-input">
+    <h3 class="subhead" id="break">Break Duration:</h3>
+    <input class="timer" id="hoursBreak" type="number" min="0" max="23" placeholder="hrs">
+    <input class="timer" id="minutesBreak" type="number" min="0" max="59" placeholder="mins">
+    <p id="demo"></p>
+    <button id="enter">Enter</button>
+    <button id="cancel" style="display: none">Stop Timer</button>
+    <br><br>
+  </div>
+
+
+
+  <br></br>
+  <a class="pageSelector" id="previous1" href="game.html">Previous</a>
+
+
+
+
+</body>
+<script>
+  let x;
+  document.getElementById("enter").onclick = () => {
+    var distance1 = document.getElementById("minutesStudy").value * 1000 * 60 + document.getElementById("hoursStudy").value * 60 * 1000 * 60;
+    var distance2 = document.getElementById("minutesBreak").value * 1000 * 60 + document.getElementById("hoursBreak").value * 60 * 1000 * 60;
+    document.getElementById("enter").style.display = "none";
+    document.getElementById("hoursStudy").style.display = "none";
+    document.getElementById("minutesBreak").style.display = "none";
+    document.getElementById("hoursBreak").style.display = "none";
+    document.getElementById("minutesStudy").style.display = "none";
+    document.getElementById("break").style.display = "none";
+    document.getElementById("cancel").style.display = "inline-block";
+    document.querySelector(".mainContent").style.display = "none";
+
+    document.getElementById("mainhead").innerHTML = "Study Time!";
+
+    var time = distance1
+    var mode = "Study"
+
+    var hoursStudy = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutesStudy = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+    var secondsStudy = Math.floor((time % (1000 * 60)) / 1000);
+    document.getElementById("demo").innerHTML = hoursStudy + "h " + minutesStudy + "m " + secondsStudy + "s";
+    x = setInterval(function () {
+      var hoursStudy = Math.floor((time % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      var minutesStudy = Math.floor((time % (1000 * 60 * 60)) / (1000 * 60));
+      var secondsStudy = Math.floor((time % (1000 * 60)) / 1000);
+      document.getElementById("demo").innerHTML = hoursStudy + "h " + minutesStudy + "m " + secondsStudy + "s";
+
+
+      if (time <= 0) {
+        if (mode == "Study") {
+          alert("Study time is over! It's time for you to take a well deserved break!")
+          time = distance2 + 1000
+          document.getElementById("mainhead").innerHTML = "Break Time!";
+          mode = "Break"
+        } else if (mode == "Break") {
+          alert("Break time is over! It's time for you to get back to work!")
+          time = distance1 + 1000
+          document.getElementById("mainhead").innerHTML = "Study Time!";
+          mode = "Study"
+        }
+      }
+      time -= 1000;
+    }, 1000);
+  }
+
+  document.getElementById("cancel").onclick = () => {
+    clearInterval(x);
+    document.getElementById("cancel").style.display = "none";
+    document.getElementById("enter").style.display = "inline-block";
+    document.getElementById("hoursStudy").style.display = "inline-block";
+    document.getElementById("minutesBreak").style.display = "inline-block";
+    document.getElementById("hoursBreak").style.display = "inline-block";
+    document.getElementById("minutesStudy").style.display = "inline-block";
+    document.getElementById("break").style.display = "block";
+    document.getElementById("demo").innerHTML = "";
+    document.querySelector(".mainContent").style.display = "block";
+
+    document.getElementById("break").innerHTML = "Break Duration:"
+    document.getElementById("mainhead").innerHTML = "Study Duration:";
+  }
+
+
+  const hoursStudy = document.getElementById("hoursStudy");
+  const minutesStudy = document.getElementById("minutesStudy");
+  const hoursBreak = document.getElementById("hoursBreak");
+  const minutesBreak = document.getElementById("minutesBreak");
+
+  const manageHoursInput = (thing) => {
+    let value = document.getElementById(thing).value
+    if (value > 23) {
+      value = 23;
+    } else if (hoursStudy.value < 0) {
+      value = 0;
+    }
+  }
+
+  const manageMinutesInput = (thing) => {
+    let value = document.getElementById(thing).value
+    if (value > 59) {
+      value = 59;
+    } else if (value < 0) {
+      value = 0;
+    }
+  }
+
+  hoursStudy.oninput = () => manageHoursInput("hoursStudy");
+  hoursBreak.oninput = () => manageHoursInput("hoursBreak");
+  minutesStudy.oninput = () => manageMinutesInput("minutesStudy");
+  minutesBreak.oninput = () => manageMinutesInput("minutesBreak");
+</script>
+
+</html>
