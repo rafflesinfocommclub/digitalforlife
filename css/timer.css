@@ -1,0 +1,183 @@
+/* timer */
+.subhead {
+  font-family: "Roboto"
+}
+
+.timer-input {
+  text-align: center;
+  font-family: "Roboto"
+}
+
+.timer {
+  height: 30px;
+  width: 200px;
+  border: none;
+  outline: solid 2px;
+  border-radius: 10px;
+  margin: 0 5px 0 10px;
+  padding: 4px;
+  padding-left: 10px;
+  font-family: "Roboto";
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.timer:hover {
+  border-radius: 13px;
+}
+
+.timer:focus {
+  outline-color: #27589C;
+  outline-width: 3px;
+  border-radius: 14px;
+}
+
+.timer-button {
+  border: none;
+  background-color: #3a9eb7;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-left: calc(50% - 25px);
+  transition: ease-in-out 0.3s;
+  transition-delay: 0.1s;
+}
+.timer-button:hover {
+  opacity: 0.9;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #333;
+}
+.timer-button:active {
+  opacity: 0.8;
+}
+.timer-button span {
+  font-size: 35px;
+  transition: ease-in-out 0.25s;
+}
+.timer-button:hover span {
+  font-size: 48px;
+}
+.timer-button:hover {
+  width: 65px;
+  height: 65px;
+  margin-top: -2.5px;
+  margin-left: calc(50% - 27.5px);
+  background-color: #333;
+}
+#pause:hover {
+  background-color: #3a9eb7;
+}
+#enter.inactive {
+  opacity: 0.25;
+}
+#enter.inactive:hover span {
+  font-size: 25px;
+}
+#enter.inactive:hover {
+  opacity: 0.25;
+  padding: 0;
+  width: 50px;
+  height: 50px;
+  margin-top: 0;
+  margin-left: calc(50% - 25px);
+  cursor: default;
+  background-color: #3a9eb7;
+}
+
+
+#demo {
+  display: block;
+  text-align: center;
+  font-family: "Roboto";
+  font-size: 70px;
+  z-index: 15;
+  margin-top: 195px;
+  margin-bottom: 15px;
+  transition: ease-in-out 0.2s;
+}
+#demo.paused {
+  font-size: 62px;
+  margin-top: 210px;
+}
+
+#progress-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: auto;
+  width: 520px;
+  height: 520px;
+  background: conic-gradient(#3a9eb7 360deg, #3a9eb7 0deg);
+  border-radius: 50%;
+  z-index: 5;
+  transition: ease-in-out 0.1s;
+}
+#timer-div {
+  width: 490px;
+  height: 490px;
+  background-color: white;
+  border-radius: 50%;
+  z-index: 10;
+  transition: ease-in-out 0.3s;
+}
+#timer-div.paused {
+  width: 505px;
+  height: 505px;
+}
+.subhead {
+  margin-bottom: 10px;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 1,
+  'wght' 700,
+  'GRAD' 200,
+  'opsz' 48
+}
+
+
+/* for phones because yes */
+@media only screen and (max-width: 500px) {
+  .timer {
+    width: 130px;
+    outline: none;
+    border: 2px solid;
+    border-radius: 15px;
+  }
+  .timer:focus {
+    border-color: #27589C;
+    border-width: 3px;
+    border-radius: 15px;
+  }
+  #progress-bar {
+    width: 370px;
+    height: 370px;
+  }
+  #timer-div {
+    width: 345px;
+    height: 345px;
+  }
+  #timer-div.paused {
+    width: 360px;
+    height: 360px;
+  }
+  #demo {
+    font-size: 52px;
+    margin-top: 135px;
+  }
+  #demo.paused {
+    font-size: 46px;
+    margin-top: 145px;
+  }
+  body.unscrollable {
+    margin: 0; 
+    height: 100%; 
+    overflow: hidden;
+  }
+}
